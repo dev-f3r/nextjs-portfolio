@@ -1,15 +1,15 @@
 export default function NavLink({
   name,
-  inViewCollection,
+  inView,
   scrollToSection,
 }: {
   name: string,
-  inViewCollection: { [name: string]: boolean };
+  inView: boolean;
   scrollToSection: (id: string) => void;
 }) {
   return (
     <li
-      className={`navbar-link ${inViewCollection[name] ? "bg-black text-white" : "bg-none text-black"}`}
+      className={`navbar-link ${inView ? "bg-black text-white" : "bg-none text-black"}`}
     >
       <button
         className=""

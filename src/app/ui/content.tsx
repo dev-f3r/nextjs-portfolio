@@ -1,27 +1,22 @@
 "use client";
 
-import Navbar from "./navbar";
+import Navbar from "./navbar/navbar";
 import Section from "./section";
 import { useInView } from "react-intersection-observer";
 
+function useVisibilityTracking(ids: string[], options = { threshold: 0.7 }) {
+  return ids.reduce((acc, id) => {
+    const { ref, inView } = useInView(options);
+    acc[id] = { ref, inView };
+    return acc;
+  }, {} as { [key: string]: { ref: (node?: Element | null | undefined) => void, inView: boolean } })
+}
+
 export default function Content() {
+  const sectionsIds = ["about", "experience", "skills", "contact"];
   const descriptionTxt = "I'm a software developer.";
 
-  // TODO: Make a sections container component and pass all inView logic
-  const inViewOptions = {
-    threshold: 0.8,
-  };
-  const { ref: aboutRef, inView: isAboutRef } = useInView(inViewOptions);
-  const { ref: experienceRef, inView: isExperienceRef } =
-    useInView(inViewOptions);
-  const { ref: skillsRef, inView: isSkillsRef } = useInView(inViewOptions);
-  const { ref: contactRef, inView: isContactRef } = useInView(inViewOptions);
-  const inViewElements = {
-    about: isAboutRef,
-    experience: isExperienceRef,
-    skills: isSkillsRef,
-    contact: isContactRef,
-  };
+  const sectionsVisibilityTracking = useVisibilityTracking(sectionsIds);
 
   const scrollSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
@@ -40,18 +35,24 @@ export default function Content() {
       <div className="h-full w-1/2 py-40 pl-20">
         <h2 className="text-1xl font-medium">{descriptionTxt}</h2>
         <Navbar
+          keys={sectionsIds}
           scrollToSection={scrollSection}
-          inViewCollection={inViewElements}
+          inViewCollection={sectionsVisibilityTracking}
         />
       </div>
       <div
         className="h-full w-1/2 pr-8 overflow-auto scrollbar-hide"
         id="sectionsContainer"
       >
-        <Section inViewRef={aboutRef} title="about" />
-        <Section inViewRef={experienceRef} title="experience" />
-        <Section inViewRef={skillsRef} title="skills" />
-        <Section inViewRef={contactRef} title="contact" />
+        {sectionsIds.map((id) => (
+          <Section
+            key={id}
+            inViewRef={sectionsVisibilityTracking[id].ref}
+            title={id}
+          />
+        ))
+
+        }
       </div>
     </div>
   );

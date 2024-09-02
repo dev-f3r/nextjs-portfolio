@@ -8,7 +8,12 @@ export default function Navbar({
   keys,
 }: {
   scrollToSection: (id: string) => void;
-  inViewCollection: { [key: string]: boolean };
+  inViewCollection: {
+    [key: string]: {
+      ref: (node?: Element | null | undefined) => void;
+      inView: boolean;
+    };
+  };
   keys: string[];
 }) {
   return (
@@ -18,7 +23,7 @@ export default function Navbar({
           <NavLink
             key={key}
             name={key}
-            inViewCollection={inViewCollection}
+            inView={inViewCollection[key].inView}
             scrollToSection={scrollToSection}
           />
         ))
