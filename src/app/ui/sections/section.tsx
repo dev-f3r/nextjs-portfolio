@@ -1,4 +1,4 @@
-import { capFirst } from "../lib/utils";
+import { capFirst } from "@lib/utils";
 
 export default function Section({
   title,
