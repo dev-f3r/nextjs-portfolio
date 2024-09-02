@@ -5,7 +5,7 @@ import Section from "./section";
 import { useInView } from "react-intersection-observer";
 
 // Custom hook to track the visibility of sections based on their IDs
-function useVisibilityTracking(ids: string[], options = { threshold: 0.7 }) {
+function useVisibilityTracking(ids: string[], options = { threshold: 0.65 }) {
   // Reduce the array of IDs into an object containing refs and inView states
   return ids.reduce((acc, id) => {
     // useInView hook provides ref and visibility state for each element
@@ -39,7 +39,7 @@ export default function Content() {
   return (
     <div className="h-screen flex items-center justify-center" id="content">
       <div className="h-full w-1/2 py-40 pl-20">
-        <h2 className="text-1xl font-medium">{descriptionTxt}</h2>
+        <h2 className="text-2xl font-medium">{descriptionTxt}</h2>
         <Navbar
           keys={sectionsIds}
           scrollToSection={scrollSection}
