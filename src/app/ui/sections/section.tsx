@@ -1,26 +1,30 @@
-import { capFirst } from "@lib/utils";
+import AboutSection from "./about";
+import React from "react";
+import ExperienceSection from "./experience/experience";
+import SkillsSection from "./skills/skills";
+import ContactSection from "./contact/contact";
+
+const sections: {[key: string]: React.ReactNode} = {
+  about: <AboutSection />,
+  experience: <ExperienceSection />,
+  skills: <SkillsSection />,
+  contact: <ContactSection />,
+}
 
 export default function Section({
-  title,
+  name,
   inViewRef,
 }: {
-  title: string;
+  name: string;
   inViewRef?: (node?: Element | null | undefined) => void;
 }) {
   return (
     <section
-      id={`${title}Section`}
+      id={`${name}Section`}
       className={`h-[500px] pt-10`}
       ref={inViewRef}
     >
-      <h2>{capFirst(title)}</h2>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ex,
-        sed dignissimos temporibus molestias quis mollitia consequatur
-        voluptates, ab aspernatur explicabo aperiam tempore quidem hic sequi!
-        Odio placeat rerum autem enim non, assumenda aperiam esse cum, adipisci
-        perspiciatis, accusamus corporis.
-      </p>
+      {sections[name]}
     </section>
   );
 }
