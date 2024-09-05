@@ -1,4 +1,4 @@
-import { capFirst } from "@/app/lib/utils";
+import { capFirst } from "@lib/utils";
 
 export default function NavLink({
   name,
@@ -11,11 +11,12 @@ export default function NavLink({
 }) {
   return (
     <li
-      className={`hover:bg-gray-500 px-5 rounded-md ${inView ? "bg-black text-white" : "bg-none text-black"}`}
+      className={`hover:shadow-xl px-5 rounded-md ${inView ? "bg-black text-white" : "bg-none text-black"}`}
     >
       <button
         className="w-full text-left font-medium"
-        onClick={() => scrollToSection(`${name}Section`)}>
+        onClick={() => scrollToSection(`${name}Section`)}
+      >
         {capFirst(name)}
       </button>
     </li>
