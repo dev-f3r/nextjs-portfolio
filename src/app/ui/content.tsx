@@ -1,7 +1,7 @@
 "use client";
 
 import Navbar from "./navbar/navbar";
-import Section from "./section";
+import Section from "./sections/section";
 import { useInView } from "react-intersection-observer";
 
 // Custom hook to track the visibility of sections based on their IDs
@@ -10,10 +10,10 @@ function useVisibilityTracking(ids: string[], options = { threshold: 0.65 }) {
   return ids.reduce((acc, id) => {
     // useInView hook provides ref and visibility state for each element
     const { ref, inView } = useInView(options);
-    
+
     // Store the ref and inView state in an object, keyed by the section ID
     acc[id] = { ref, inView };
-    
+
     return acc;
   }, {} as { [key: string]: { ref: (node?: Element | null | undefined) => void, inView: boolean } });
 }
@@ -33,6 +33,8 @@ export default function Content() {
         top: section.offsetTop - container.offsetTop,
         behavior: "smooth",
       });
+    } else {
+      console.error('Section or container not found')
     }
   };
 
@@ -54,7 +56,7 @@ export default function Content() {
           <Section
             key={id}
             inViewRef={sectionsVisibilityTracking[id].ref}
-            title={id}
+            name={id}
           />
         ))
         }
