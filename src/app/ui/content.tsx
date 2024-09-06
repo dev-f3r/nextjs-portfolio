@@ -1,22 +1,8 @@
 "use client";
 
+import useVisibilityTracking from "../hook/useVisibilityTracking";
 import Navbar from "./navbar/navbar";
 import Section from "./sections/section";
-import { useInView } from "react-intersection-observer";
-
-// Custom hook to track the visibility of sections based on their IDs
-function useVisibilityTracking(ids: string[], options = { threshold: 0.65 }) {
-  // Reduce the array of IDs into an object containing refs and inView states
-  return ids.reduce((acc, id) => {
-    // useInView hook provides ref and visibility state for each element
-    const { ref, inView } = useInView(options);
-
-    // Store the ref and inView state in an object, keyed by the section ID
-    acc[id] = { ref, inView };
-
-    return acc;
-  }, {} as { [key: string]: { ref: (node?: Element | null | undefined) => void, inView: boolean } });
-}
 
 export default function Content() {
   const sectionsIds = ["about", "experience", "skills", "contact"];
@@ -27,10 +13,12 @@ export default function Content() {
   const scrollSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
     const container = document.getElementById("sectionsContainer");
-    `react-intersection-observer`;
+
     if (section && container) {
+      // Smooth scrolling to the section
       container.scrollTo({
-        top: section.offsetTop - container.offsetTop,
+        top: section.offsetTop - container.offsetTop, // Calculate the offset from the container
+        left: 0,
         behavior: "smooth",
       });
     } else {
@@ -40,7 +28,7 @@ export default function Content() {
 
   return (
     <div className="h-screen flex items-center justify-center" id="content">
-      <div className="h-full w-1/2 py-40 pl-20">
+      <div className="h-full w-1/3 py-40 pl-20">
         <h2 className="text-2xl font-medium">{descriptionTxt}</h2>
         <Navbar
           keys={sectionsIds}
@@ -49,13 +37,13 @@ export default function Content() {
         />
       </div>
       <div
-        className="h-full w-1/2 pr-8 overflow-auto scrollbar-hide"
+        className="h-full w-2/3 pr-8 overflow-auto scrollbar-hide"
         id="sectionsContainer"
       >
         {sectionsIds.map((id) => (
           <Section
             key={id}
-            inViewRef={sectionsVisibilityTracking[id].ref}
+            interceptionRef={sectionsVisibilityTracking[id].ref}
             name={id}
           />
         ))
