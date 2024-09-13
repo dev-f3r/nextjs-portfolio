@@ -5,7 +5,7 @@ import Navbar from "./navbar/navbar";
 import Section from "./sections/section";
 
 export default function Content() {
-  const sectionsIds = ["about", "experience", "skills", "contact"];
+  const sectionsIds = ["about", "experience", "projects", "skills", "contact"];
   const descriptionTxt = "I'm a software developer.";
 
   const sectionsVisibilityTracking = useVisibilityTracking(sectionsIds);

@@ -1,28 +1,30 @@
-import AboutSection from "./about";
 import React from "react";
+import AboutSection from "./about";
 import ExperienceSection from "./experience/experience";
+import ProjectSection from "./projects/projects";
 import SkillsSection from "./skills/skills";
 import ContactSection from "./contact/contact";
 
-const sections: {[key: string]: React.ReactNode} = {
+const sections: { [key: string]: React.ReactNode } = {
   about: <AboutSection />,
   experience: <ExperienceSection />,
+  projects: <ProjectSection />,
   skills: <SkillsSection />,
   contact: <ContactSection />,
 }
 
 export default function Section({
   name,
-  inViewRef,
+  interceptionRef,
 }: {
   name: string;
-  inViewRef?: (node?: Element | null | undefined) => void;
+  interceptionRef?: (node?: Element | null | undefined) => void;
 }) {
   return (
     <section
       id={`${name}Section`}
-      className={`h-[500px] pt-10`}
-      ref={inViewRef}
+      className="py-10 px-5 mt-5"
+      ref={interceptionRef}
     >
       {sections[name]}
     </section>
