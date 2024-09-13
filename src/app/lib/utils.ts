@@ -4,7 +4,7 @@
  * @returns The capitalized string
  */
 export function capFirst(txt: string) {
-  return txt.charAt(0).toUpperCase() + txt.slice(1);
+	return txt.charAt(0).toUpperCase() + txt.slice(1);
 }
 
 /**
@@ -13,5 +13,5 @@ export function capFirst(txt: string) {
  * @returns True if is empty, false otherwise.
  */
 export function isObjectEmpty(obj: object): boolean {
-  return Object.keys(obj).length === 0;
+	return Object.keys(obj).length === 0;
 }

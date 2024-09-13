@@ -1,5 +1,3 @@
 export default function SkillsSection() {
-  return (
-    <div>Skills section.</div>
-  )
+	return <div>Skills section.</div>;
 }

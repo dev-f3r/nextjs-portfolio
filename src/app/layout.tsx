@@ -5,18 +5,18 @@ import "./globals.css";
 const inter = Inter_Tight({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Fernando Castro",
-  description: "Portfolio made by Fernando Castro.",
+	title: "Fernando Castro",
+	description: "Portfolio made by Fernando Castro.",
 };
 
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
-  );
+	return (
+		<html lang="en">
+			<body className={inter.className}>{children}</body>
+		</html>
+	);
 }
