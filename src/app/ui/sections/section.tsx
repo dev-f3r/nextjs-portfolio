@@ -23,7 +23,7 @@ export default function Section({
   return (
     <section
       id={`${name}Section`}
-      className="py-10 px-5 mt-5"
+      className="pt-10 px-5"
       ref={interceptionRef}
     >
       {sections[name]}
